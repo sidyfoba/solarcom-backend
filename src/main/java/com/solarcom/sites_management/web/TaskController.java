@@ -20,7 +20,7 @@ import com.solarcom.sites_management.repo.TaskRepository;
 import com.solarcom.sites_management.services.TaskService;
 
 @RestController
-@RequestMapping("/tasks")
+@RequestMapping("/api/tasks")
 public class TaskController {
 
 	@Autowired

@@ -18,7 +18,7 @@ import com.solarcom.sites_management.repo.UserRepository;
 import com.solarcom.sites_management.services.UserService;
 
 @RestController
-@RequestMapping("/users")
+@RequestMapping("/api/users")
 public class UserController {
 
 	@Autowired
