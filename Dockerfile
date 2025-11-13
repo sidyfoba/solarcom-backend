@@ -1,6 +1,6 @@
 
 # Use a lightweight JDK 21 image
-FROM openjdk:21-jdk-slim
+FROM maven:3.9-eclipse-temurin-21 AS build
 
 # Set the working directory inside the container
 WORKDIR /app
