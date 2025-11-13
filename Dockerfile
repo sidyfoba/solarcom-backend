@@ -1,19 +1,15 @@
-# ===== Build stage =====
-FROM maven:3.9-eclipse-temurin-21 AS build
+
+# Use a lightweight JDK 21 image
+FROM openjdk:21-jdk-slim
+
+# Set the working directory inside the container
 WORKDIR /app
-COPY pom.xml .
-# download deps first (better layer caching)
-RUN mvn -q -e -DskipTests dependency:go-offline
 
-COPY src ./src
-RUN mvn -q -e -DskipTests package
+# Copy the built JAR file into the container
+COPY build/libs/*.jar app.jar
 
-# ===== Runtime stage =====
-FROM eclipse-temurin:21-jre
-WORKDIR /app
-# Copy fat jar (adjust the jar name if you don't use spring-boot default)
-COPY --from=build /app/target/*.jar /app/app.jar
+# Expose the application port
+EXPOSE 8080
 
-# Optional: expose Spring health actuator for healthcheck (already in compose curl)
-EXPOSE 9000
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+# Run the application
+ENTRYPOINT ["java", "-jar", "app.jar"]
