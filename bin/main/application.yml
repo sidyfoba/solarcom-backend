@@ -6,12 +6,30 @@ logging:
     root: DEBUG
 
 spring:
+  # --- PostgreSQL (JPA) ---
+  datasource:
+    url: jdbc:postgresql://localhost:5432/solarcomdb   # change DB name if needed
+    username: postgres                                 # <== your postgres user
+    password: postgres                                 # <== your postgres password
+    driver-class-name: org.postgresql.Driver
+
+  jpa:
+    hibernate:
+      ddl-auto: update          # create | create-drop | update | validate | none
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+
+  # --- MongoDB ---
   data:
     mongodb:
       uri: mongodb://root:password@localhost:27017/solarcomdb?authSource=admin
     rest:
-      basePath: /api
+      basePath: /api            # Spring Data REST base path (works for JPA and Mongo)
 
+  # --- Mail ---
   mail:
     host: smtp.gmail.com
     port: 587

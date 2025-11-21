@@ -1,0 +1,8 @@
+package com.slcm.sites_management.domain;
+
+public enum Recurrence {
+    DAILY, 
+    WEEKLY, 
+    MONTHLY
+}
+
